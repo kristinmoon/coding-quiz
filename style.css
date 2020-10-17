@@ -1,0 +1,27 @@
+* {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+div {
+  text-align: center;
+  margin: auto 20%;
+}
+
+.title {
+  font-size: 40px;
+}
+
+.start-btn {
+  font-size: 20px;
+  background-color: teal;
+  color: white;
+  border-radius: 4px;
+  border: none;
+  padding: 8px
+}
+
+.highscores-btn {
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+}
