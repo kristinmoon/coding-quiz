@@ -1,4 +1,3 @@
-// timer
 var timerEl = document.getElementById("countdown");
 var startBtn = document.getElementById("startBtn")
 
@@ -23,12 +22,6 @@ function countdown() {
 
 
 
-
-
-
-
-
-
 // questions
 var questions = [
   { q: "Commonly used data types DO NOT include:", ans: ["Strings", "Booleans", "Alerts", "Numbers"] },
@@ -38,22 +31,49 @@ var questions = [
   { q: "A very useful tool used during development and debugging for printing content to the debugger is:", ans: ["JavaScript", "Terminal / Bash", "For loops", "Console.log"] }
 ];
 
-document.getElementById("startBtn").addEventListener("click", displayQuestion);
+// document.getElementById("startBtn").addEventListener("click", displayQuestion);
 
-function displayQuestion() {
+// function displayQuestion() {
+//   var question = questions.pop();
+//   if (question) {
+//     var answer = confirm(question.q);
+//     if (answer === question.ans) {
+//       alert("Correct");
+//     }
+//     else {
+//       alert("Wrong");
+//     }
+//   }
+// };
+
+var displayQuestion = function (event) {
   var question = questions.pop();
-  if (question) {
-    var answer = confirm(question.q);
-    if (answer === question.ans) {
-      alert("Correct");
-    }
-    else {
-      alert("Wrong");
-    }
-  }
-};
+  var startingTitle = document.querySelector("#container");
+  var newQuestion = document.createElement("div");
+  newQuestion.className = "container";
+  newQuestion.textContent =
+    startingTitle.parentNode.replaceChild(newQuestion, startingTitle);
+}
 
+// displayQuestion();
+
+// //highscore
+// var initials = document.querySelector("initials").value;
+// var score = document.querySelector("score").value;
+
+// if (initials === "") {
+//   displayMessage("error", "Initials cannot be blank");
+// } else {
+//   displayMessage("success", "Score saved successfully");
+// }
+
+// // save initials and highscore to localStorage
+// localStorage.setItem("initials", initials);
+// localStorage.setItem("score"), score);
+
+
+
+startBtn.addEventListener("click", displayQuestion)
 startBtn.onclick = countdown;
-
 
 
