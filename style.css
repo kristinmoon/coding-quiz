@@ -5,9 +5,18 @@
 header {
   display: flex;
   justify-content: space-between;
+  padding: 5px;
+
 }
 
-div {
+header p {
+  color: teal;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.container {
   text-align: center;
   margin: auto 20%;
 }
