@@ -2,6 +2,11 @@
   font-family: 'Courier New', Courier, monospace;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
 div {
   text-align: center;
   margin: auto 20%;
@@ -21,7 +26,9 @@ div {
 }
 
 .highscores-btn {
+  color: teal;
   font-size: 20px;
+  font-weight: bold;
   border: none;
   background-color: transparent;
 }
