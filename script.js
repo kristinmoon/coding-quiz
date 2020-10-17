@@ -1,8 +1,13 @@
 var timerEl = document.getElementById("countdown");
-var startBtn = document.getElementById("startBtn")
+var startBtn = document.getElementById("start");
 
 
-// timer counts down from 75
+
+
+
+
+
+// timer function
 function countdown() {
   var timeLeft = 75;
 
@@ -23,12 +28,57 @@ function countdown() {
 
 
 // questions
-var questions = [
-  { q: "Commonly used data types DO NOT include:", ans: ["Strings", "Booleans", "Alerts", "Numbers"] },
-  { q: "The condition in an if/else statement is enclosed within ____.", ans: ["Quotes", "Curly brackets", "Parentheses", "Square brackets"] },
-  { q: "Arrays in JavaScript can be used to store ____.", ans: ["Numbers and strings", "Other arrays", "Booleans", "All of the above"] },
-  { q: "String values must be enclosed within ____ when being assigned to variables.", ans: ["Commas", "Curly brackets", "Quotes", "Parentheses"] },
-  { q: "A very useful tool used during development and debugging for printing content to the debugger is:", ans: ["JavaScript", "Terminal / Bash", "For loops", "Console.log"] }
+var myQuestions = [
+  {
+    question: "The condition in an if/else statement is enclosed within ____.",
+    answers: {
+      a: "Quotes",
+      b: "Curly brackets",
+      c: "Parentheses",
+      d: "Square brackets"
+    },
+    correctAnswer: "b"
+  },
+  {
+    question: "Commonly used data types DO NOT include:",
+    answers: {
+      a: "Strings",
+      b: "Booleans",
+      c: "Alerts",
+      d: "Numbers"
+    },
+    correctAnswer: "c"
+  },
+  {
+    question: "Arrays in JavaScript can be used to store ____.",
+    answers: {
+      a: "Numbers and strings",
+      b: "Other arrays",
+      c: "Booleans",
+      d: "All of the above"
+    },
+    correctAnswer: "d"
+  },
+  {
+    question: "String values must be enclosed within ____ when being assigned to variables.",
+    answers: {
+      a: "Commas",
+      b: "Curly brackets",
+      c: "Quotes",
+      d: "Parentheses"
+    },
+    correctAnswer: "c"
+  },
+  {
+    question: "A very useful tool used during development and debugging for printing content to the debugger is:",
+    answers: {
+      a: "JavaScript",
+      b: "Terminal / Bash",
+      c: "For loops",
+      d: "Console.log"
+    },
+    correctAnswer: "d"
+  }
 ];
 
 // document.getElementById("startBtn").addEventListener("click", displayQuestion);
@@ -46,17 +96,6 @@ var questions = [
 //   }
 // };
 
-var displayQuestion = function (event) {
-  var question = questions.pop();
-  var startingTitle = document.querySelector("#container");
-  var newQuestion = document.createElement("div");
-  newQuestion.className = "container";
-  newQuestion.textContent =
-    startingTitle.parentNode.replaceChild(newQuestion, startingTitle);
-}
-
-// displayQuestion();
-
 // //highscore
 // var initials = document.querySelector("initials").value;
 // var score = document.querySelector("score").value;
@@ -73,7 +112,6 @@ var displayQuestion = function (event) {
 
 
 
-startBtn.addEventListener("click", displayQuestion)
 startBtn.onclick = countdown;
 
 

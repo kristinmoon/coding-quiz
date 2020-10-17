@@ -9,19 +9,39 @@
 </head>
 
 <body>
+
   <header>
     <button id="view-highscores" class="highscores-btn">View Highscores</button>
     <p id="countdown"></p>
   </header>
-  <div class="container" id="container">
-    <div>
+
+  <div class="container">
+    <div id="start">
       <h1 id="title" class="title">Coding Quiz Challenge</h1>
       <p>Try to answer the following code-related questions within the time limit. Incorrect answers will penalize your
         score/time by 10 seconds.</p>
+      <button id="start" class="start-btn">Start Quiz</button>
     </div>
-    <button id="startBtn" class="start-btn">Start Quiz</button>
-    <h2 id="question"></h2>
-    <p id="answers"></p>
+
+    <div id="quiz" style="display : none;">
+      <div id="question">
+        <p>Question</p>
+      </div>
+      <div class="choice" id="A" onclick="checkAnswer('A')">A</div>
+      <div class="choice" id="B" onclick="checkAnswer('B')">B</div>
+      <div class="choice" id="C" onclick="checkAnswer('C')">C</div>
+      <div class="choice" id="D" onclick="checkAnswer('D')">D</div>
+    </div>
+  </div>
+
+  <div id="scoreContainer" style="display : none;">
+  </div>
+
+
+
+
+  <div id="results"></div>
+
   </div>
 
 
