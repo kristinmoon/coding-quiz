@@ -7,7 +7,7 @@ var choiceB = document.getElementById("B");
 var choiceC = document.getElementById("C");
 var choiceD = document.getElementById("D");
 var scoreDiv = document.getElementById("score");
-var timeLeft = 75;
+var timeLeft = 75
 
 // questions
 var questions = [
@@ -57,7 +57,7 @@ var questions = [
 
 // timer function
 function countdown() {
-  var timeLeft = 75;
+  // var timeLeft = 75;
 
   // use setInterval method to call a function to be executed every 1000ms
   var timeInterval = setInterval(function () {
@@ -68,7 +68,8 @@ function countdown() {
     else {
       timerEl.textContent = "Timer: 0"
       clearInterval(timeInterval);
-      //do something
+      alert("Time is up!")
+      scoreRender()
     }
   }, 1000);
 }
@@ -81,12 +82,20 @@ function startQuiz() {
 }
 
 function scoreRender() {
-  score.style.display = "block";
+  quiz.style.display = "none";
+  scoreDiv.style.display = "block";
   // show form page to enter initials and score 
-  score.textContent = "Your final score is " + timeLeft.value + "."
+  scoreDiv.innerHTML = "Your final score is " + timeLeft + "."
+  var formEl = document.createElement("form");
+  formEl.className = "form";
+
+  scoreDiv.appendChild(formEl);
 }
 
-
+function formHandler() {
+  preventdefault();
+  var initialsInput = document.querySelector("input[name='initials']").value;
+}
 
 
 var lastQuestion = questions.length - 1;
@@ -108,23 +117,20 @@ function renderQuestion() {
 // else, display correct and timer continues as is
 function checkAnswer(answer) {
   if (answer !== questions[runningQuestion].correct) {
-    display = "incorrect";
-    timeLeft.value -= 10;
+    alert("incorrect");
+    timeLeft = timeLeft - 10;
   } else {
-    display = "correct!";
+    alert("correct!");
   }
 
   if (runningQuestion < lastQuestion) {
     runningQuestion++;
     renderQuestion();
   } else {
-    clearInterval(timeInterval)
+    clearInterval(timeInterval);
     scoreRender();
   }
 }
-
-
-
 
 
 
