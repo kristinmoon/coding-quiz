@@ -20,7 +20,7 @@
       <h1 id="title" class="title">Coding Quiz Challenge</h1>
       <p>Try to answer the following code-related questions within the time limit. Incorrect answers will penalize your
         score/time by 10 seconds.</p>
-      <button id="start" class="start-btn">Start Quiz</button>
+      <button id="start-btn" class="btn">Start Quiz</button>
     </div>
 
     <div id="quiz" style="display : none;">
@@ -36,6 +36,27 @@
     </div>
 
     <div id="score" style="display : none;">
+      <div>
+        <h1 id="quiz-complete" class="title">Quiz Complete</h1>
+      </div>
+      <form id="form">
+        <div class="form-group">
+          <input type="text" name="initials" class="text-input" placeholder="Enter Initials" />
+        </div>
+        <div class="form-group">
+          <button class="btn" id="save-initials" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="highscore-display" style="display : none;">
+      <div>
+        <h1 class="title">Highscores</h1>
+      </div>
+      <div id="highscore-page-buttons">
+        <button class="btn" id="go-back-btn">Go Back</button>
+        <button class="btn" id="clear-highscores-btn">Clear Highscores</button>
+      </div>
     </div>
 
   </div>

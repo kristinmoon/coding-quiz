@@ -1,4 +1,6 @@
 var timerEl = document.getElementById("countdown");
+var startBtn = document.getElementById("start-btn");
+var viewHighscoresBtn = document.getElementById("view-highscores");
 var start = document.getElementById("start");
 var quiz = document.getElementById("quiz");
 var question = document.getElementById("question");
@@ -7,7 +9,13 @@ var choiceB = document.getElementById("B");
 var choiceC = document.getElementById("C");
 var choiceD = document.getElementById("D");
 var scoreDiv = document.getElementById("score");
-var timeLeft = 75
+var timeLeft = 50;
+var formEl = document.getElementById("form");
+var highscores = []
+var highscoreDisplay = document.getElementById("highscore-display");
+var quizComplete = document.getElementById("quiz-complete");
+var goBackBtn = document.getElementById("go-back-btn");
+var formBtn = document.getElementById("save-initials");
 
 // questions
 var questions = [
@@ -54,10 +62,30 @@ var questions = [
 ];
 
 
+///////////////////////////////////
+function viewHighscores() {
+  start.style.display = "none";
+  highscoreDisplay.style.display = "block";
+}
 
-// timer function
+
+///////////////////////////////////
+function startQuiz() {
+  start.style.display = "none";
+  countdown()
+  renderQuestion();
+  quiz.style.display = "block";
+}
+
+/////////////////////////////////////
+function goToStart() {
+  highscoreDisplay.style.display = "none";
+  start.style.display = "block";
+}
+
+///////////////////////////////////
+//timer function
 function countdown() {
-  // var timeLeft = 75;
 
   // use setInterval method to call a function to be executed every 1000ms
   var timeInterval = setInterval(function () {
@@ -68,39 +96,14 @@ function countdown() {
     else {
       timerEl.textContent = "Timer: 0"
       clearInterval(timeInterval);
-      alert("Time is up!")
-      scoreRender()
+      //scoreRender()
+
     }
   }, 1000);
 }
 
-function startQuiz() {
-  start.style.display = "none";
-  countdown()
-  renderQuestion();
-  quiz.style.display = "block";
-}
 
-function scoreRender() {
-  quiz.style.display = "none";
-  scoreDiv.style.display = "block";
-  // show form page to enter initials and score 
-  scoreDiv.innerHTML = "Your final score is " + timeLeft + "."
-  var formEl = document.createElement("form");
-  formEl.className = "form";
-
-  scoreDiv.appendChild(formEl);
-}
-
-function formHandler() {
-  preventdefault();
-  var initialsInput = document.querySelector("input[name='initials']").value;
-}
-
-
-var lastQuestion = questions.length - 1;
-var runningQuestion = 0;
-
+///////////////////////////////////
 // ask a question
 function renderQuestion() {
   var q = questions[runningQuestion];
@@ -110,6 +113,9 @@ function renderQuestion() {
   choiceC.innerHTML = q.choiceC;
   choiceD.innerHTML = q.choiceD;
 }
+
+var lastQuestion = questions.length - 1;
+var runningQuestion = 0;
 
 
 // check answer
@@ -127,28 +133,64 @@ function checkAnswer(answer) {
     runningQuestion++;
     renderQuestion();
   } else {
-    clearInterval(timeInterval);
     scoreRender();
+    setTimeout(allQuestionsAnswered);
+
+  }
+}
+
+
+// stop countdown after all questions have been answered
+function allQuestionsAnswered() {
+  clearTimeout(countdown);
+}
+
+
+///////////////////////////////////
+function scoreRender() {
+  quiz.style.display = "none";
+  scoreDiv.style.display = "block";
+  // show form page to enter initials and score 
+  var scoreEl = document.createElement("div");
+  scoreEl.innerHTML = "<p>Your final score is " + timeLeft + ".</p>"
+  quizComplete.appendChild(scoreEl);
+}
+
+
+///////////////////////////////////
+// highscore form
+function highscoreFormHandler() {
+  preventDefault();
+  var initialsInput = document.querySelector("input[name='initials']").value;
+  var scoreInput = document.querySelector(timeLeft).value;
+}
+
+///////////////////////////////////
+function saveHighscore() {
+  localStorage.setItem("highscore", JSON.stringify(highscores));
+}
+
+///////////////////////////////////
+function loadHighscores() {
+  // get highscores from localStorage
+  var savedHighscores = localStorage.getItem("highscore");
+  if (!savedHighscores) {
+    return false;
+  }
+  savedHighscores = JSON.parse(savedHighscores);
+
+  for (var i = 0; i < savedHighscores.length; i++) {
+    displayHighscores(savedHighscores[i]);
   }
 }
 
 
 
-// //highscore
-// var initials = document.querySelector("initials").value;
-// var score = document.querySelector("score").value;
-
-// if (initials === "") {
-//   displayMessage("error", "Initials cannot be blank");
-// } else {
-//   displayMessage("success", "Score saved successfully");
-// }
-
-// // save initials and highscore to localStorage
-// localStorage.setItem("initials", initials);
-// localStorage.setItem("score"), score);
 
 
-
-start.addEventListener("click", startQuiz);
+startBtn.addEventListener("click", startQuiz);
+formEl.addEventListener("submit", highscoreFormHandler);
+viewHighscoresBtn.addEventListener("click", viewHighscores);
+scoreDiv.addEventListener("submit", viewHighscores)
+goBackBtn.addEventListener("click", goToStart)
 
