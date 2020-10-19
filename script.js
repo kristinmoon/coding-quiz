@@ -15,7 +15,9 @@ var highscores = []
 var highscoreDisplay = document.getElementById("highscore-display");
 var quizComplete = document.getElementById("quiz-complete");
 var goBackBtn = document.getElementById("go-back-btn");
+var clearHighscoresBtn = document.getElementById("clear-highscores-btn");
 var formBtn = document.getElementById("save-initials");
+var highScoresTitle = document.getElementById("highscores-title");
 
 // questions
 var questions = [
@@ -156,41 +158,34 @@ function scoreRender() {
   quizComplete.appendChild(scoreEl);
 }
 
-
 ///////////////////////////////////
-// highscore form
-function highscoreFormHandler() {
-  preventDefault();
-  var initialsInput = document.querySelector("input[name='initials']").value;
-  var scoreInput = document.querySelector(timeLeft).value;
+function populateStorage() {
+  localStorage.setItem("highscore", timeLeft)
+  localStorage.setItem("initials", document.querySelector("input[name='initials']").value)
+
+  scoreDiv.style.display = "none";
+  highscoreDisplay.style.display = "block";
 }
 
-///////////////////////////////////
-function saveHighscore() {
-  localStorage.setItem("highscore", JSON.stringify(highscores));
-}
+
 
 ///////////////////////////////////
 function loadHighscores() {
   // get highscores from localStorage
-  var savedHighscores = localStorage.getItem("highscore");
-  if (!savedHighscores) {
-    return false;
-  }
-  savedHighscores = JSON.parse(savedHighscores);
+  var highscoreEl = document.createElement("div");
+  highscoreEl.innerHTML = "<p>" + localStorage.getItem("highscore") + ": " + localStorage.getItem("initials") + "</p>"
+  highScoresTitle.appendChild(highscoreEl);
+}
 
-  for (var i = 0; i < savedHighscores.length; i++) {
-    displayHighscores(savedHighscores[i]);
-  }
+
+function clearHighscores() {
+  Storage.clear();
 }
 
 
 
-
-
 startBtn.addEventListener("click", startQuiz);
-formEl.addEventListener("submit", highscoreFormHandler);
+formEl.addEventListener("submit", populateStorage);
 viewHighscoresBtn.addEventListener("click", viewHighscores);
-scoreDiv.addEventListener("submit", viewHighscores)
-goBackBtn.addEventListener("click", goToStart)
-
+goBackBtn.addEventListener("click", goToStart);
+clearHighscoresBtn.addEventListener("click", clearHighscores)
